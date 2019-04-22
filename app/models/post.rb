@@ -1,2 +1,12 @@
 class Post < ActiveRecord::Base
+  include ActiveModel::Validations
+
+ validates :content, length: { minimum: 250}
+ validates :summary, length: { maximum: 250}
+ validates :category, inclusion: { in: %w(Fiction Non-Fiction)}
+ validates_with TitleValidator
+
 end
+
+
+#let(:non_clickbait) { Post.new(valid_attrs.merge(title: "True Facts")) }
